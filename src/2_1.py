@@ -8,7 +8,7 @@ from math import sqrt
 
 def sklearn():
     for i in range(10): 
-        df = pd.read_csv("/home/george/dda3030/src/Regression.csv") 
+        df = pd.read_csv("src/Regression.csv") 
         df.head()
         df.drop(["station","Date"],axis=1,inplace=True)
         df.dropna(inplace=True)
@@ -59,5 +59,5 @@ def main():
 
 
 for i in range(10):
-    print('iteration',i)
+    print('iteration',i+1)
     main()
