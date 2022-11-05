@@ -26,9 +26,9 @@ def svm_linear(X_train, y_train, X_test, y_test, c):
     print('w = ',classifier.coef_)
     print('b = ',classifier.intercept_)
     print('Indices of support vectors = ', classifier.support_)
-    f = open("SVM_linear.txt", "w")
-    f.write(str(error(y_test, y_pred_test))+ '\n')
-    f.write(str(error(y_test, y_pred_test))+ '\n')
+    f = open("SVM_linear.txt", "a")
+    f.write(str(error(y_test, y_pred_test))+ '%\n')
+    f.write(str(error(y_pred_train, y_train))+ '%\n')
     f.write(str(classifier.coef_)+ '\n')
     f.write(str(classifier.intercept_)+ '\n')
     f.write(str(classifier.support_)+ '\n')
@@ -58,16 +58,16 @@ def svm_linear_slack(X_train, y_train, X_test, y_test, c):
     if(c!=1e5):
         print("slack variable = ", slack)
 
-    f = open("SVM_slack.txt", "w")
-    f.write(str(error(y_test, y_pred_test))+ '\n')
-    f.write(str(error(y_pred_train, y_train))+ '\n')
+    f = open("SVM_slack.txt", "a")
+    f.write(str(error(y_test, y_pred_test))+ '%\n')
+    f.write(str(error(y_pred_train, y_train))+ '%\n')
     f.write(str(classifier.coef_)+ '\n')
     f.write(str(classifier.intercept_)+ '\n')
     f.write(str(classifier.support_)+ '\n')
     f.write(str(slack)+ '\n')
     f.close()
-def svm_poly_slack(X_train, y_train, X_test, y_test,degree):
-    classifier = SVC(kernel = 'poly',degree = degree, C=1)
+def svm_poly_slack(X_train, y_train, X_test, y_test,dgr):
+    classifier = SVC(kernel = 'poly',degree = dgr, C=1)
     classifier.fit(X_train, y_train)
 
     #Make the prediction
@@ -81,6 +81,14 @@ def svm_poly_slack(X_train, y_train, X_test, y_test,degree):
     print("testing error {:.2f} % ".format(error(y_pred_train, y_train)))
     print('b = ',classifier.intercept_)
     print('Indices of support vectors = ', classifier.support_)
+
+    f = open(("SVM_poly" + str(dgr) +".txt"), "a")
+    f.write(str(error(y_test, y_pred_test))+ '%\n')
+    f.write(str(error(y_pred_train, y_train))+ '%\n')
+    f.write(str(classifier.support_)+ '\n')
+    f.write(str(classifier.intercept_)+ '\n')
+
+    f.close()
  
 def svm_rbf(X_train, y_train, X_test, y_test, gamma):
     classifier = SVC(kernel = 'rbf', C=1, gamma=gamma)
@@ -99,8 +107,16 @@ def svm_rbf(X_train, y_train, X_test, y_test, gamma):
     print('b = ',classifier.intercept_)
     print('Indices of support vectors = ', classifier.support_)
 
+    f = open("SVM_rbf.txt", "a")
+    f.write(str(error(y_test, y_pred_test))+ '%\n')
+    f.write(str(error(y_pred_train, y_train))+ '%\n')
+    f.write(str(classifier.support_)+ '\n')
+    f.write(str(classifier.intercept_)+ '\n')
+
+    f.close()
+
 def svm_sig(X_train, y_train, X_test, y_test, g):
-    classifier = SVC(kernel = 'sigmoid', C=1, gamma=g)
+    classifier = SVC(kernel = 'sigmoid', C=1, gamma=1)
     classifier.fit(X_train, y_train)
 
     #Make the prediction
@@ -115,6 +131,14 @@ def svm_sig(X_train, y_train, X_test, y_test, g):
 
     print('b = ',classifier.intercept_)
     print('Indices of support vectors = ', classifier.support_)
+
+    f = open("SVM_sigmoid.txt", "a")
+    f.write(str(error(y_test, y_pred_test))+ '%\n')
+    f.write(str(error(y_pred_train, y_train))+ '%\n')
+    f.write(str(classifier.support_)+ '\n')
+    f.write(str(classifier.intercept_)+ '\n')
+
+    f.close()
 
 def CalSVM(df_train, df_test, c,SVMType):
     
