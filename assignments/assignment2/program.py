@@ -54,7 +54,8 @@ def svm_linear_slack(X_train, y_train, X_test, y_test, c):
     print('w = ',classifier.coef_)
     print('b = ',classifier.intercept_)
     print('Indices of support vectors = ', classifier.support_)
-    slack = abs(1 - classifier.decision_function(X_train))
+    # slack = abs(1 - classifier.decision_function(X_train))
+    slack = abs(1- X_train.dot(classifier.coef_.T) - classifier.intercept_)
     if(c!=1e5):
         print("slack variable = ", slack)
 
