@@ -1,7 +1,6 @@
 import pandas as pd
 from sklearn.svm import SVC
 
-
 def error(test,pred):
     error = 0
     for i in range(0,len(test)):
